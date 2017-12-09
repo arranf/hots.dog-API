@@ -13,7 +13,8 @@ const String _winRateUrl = '/api/get-winrates';
 Map<String, String> _getHeaders() {
   return {
     "Accept": "application/json",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "User-Agent": "arranf (https://github.com/arranf/hots.dog-API)"
   };
 }
 
