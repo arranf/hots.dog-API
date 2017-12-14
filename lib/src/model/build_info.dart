@@ -15,4 +15,8 @@ class BuildInfo {
 
     return new BuildInfo(json['ID'], json['Start'], json['Finish']);
   }
+
+  @override String toString(){
+    return number;
+  }
 }

@@ -28,4 +28,9 @@ class GameInfo {
     json['Builds'].forEach((buildJson) => builds.add(new BuildInfo.fromJson(buildJson)));
     return new GameInfo(heroes, builds, modes, maps);
   }
+
+  @override
+  String toString() {
+    return 'GameInfo{heroInfo: $heroInfo, maps: $maps, modes: $modes, buildINfo: $buildInfo}';
+  }
 }

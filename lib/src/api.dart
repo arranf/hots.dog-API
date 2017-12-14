@@ -25,7 +25,7 @@ Map<String, String> _getHeaders() {
   };
 }
 
-Future<WinRates> getWinrates(String buildNumber, [String mapName = '']) async {
+Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (!_isValidBuildNumber(buildNumber)){
     throw new Exception('Build number is not a valid build number');
   }
