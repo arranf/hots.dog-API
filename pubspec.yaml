@@ -1,7 +1,7 @@
 name: hots_dog_api
 description: Library to use the hots.dog api
 version: 1.0.1
-homepage: https://github.com/arranf/hots_dog_api
+homepage: https://github.com/arranf/hots.dog-API
 authors:
   - Arran France <arranf@gmail.com>
 
