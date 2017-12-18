@@ -8,15 +8,19 @@ class BuildInfo {
     this.end = DateTime.parse(end);
   }
 
-  factory BuildInfo.fromJson(Object json){
-    if (!(json is Map && json['ID'] is String && json['Start'] is String && json['Finish'] is String)) {
+  factory BuildInfo.fromJson(Object json) {
+    if (!(json is Map &&
+        json['ID'] is String &&
+        json['Start'] is String &&
+        json['Finish'] is String)) {
       throw new Exception('Unexpected JSON format.');
     }
 
     return new BuildInfo(json['ID'], json['Start'], json['Finish']);
   }
 
-  @override String toString(){
+  @override
+  String toString() {
     return number;
   }
 }

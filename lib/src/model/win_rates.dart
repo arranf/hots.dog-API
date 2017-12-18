@@ -1,4 +1,5 @@
 import 'win_loss_count.dart';
+import 'dart:convert';
 
 class WinRates {
   final Map<String, WinLossCount> current;
@@ -11,7 +12,7 @@ class WinRates {
       var current = new Map<String, WinLossCount>();
       var previous = new Map<String, WinLossCount>();
       if (json['Current'] is Map && json['Previous'] is Map) {
-        for (var key in json['Current'].keys) {
+        for (String key in json['Current'].keys) {
           var heroWinMap = json['Current'][key];
           if (heroWinMap is Map) {
             current[key] = new WinLossCount.fromJson(heroWinMap);
@@ -30,5 +31,18 @@ class WinRates {
     } else {
       throw new Exception('The provided JSON must be a Map.');
     }
+  }
+
+  @override
+  String toString() {
+    String str = "Current:";
+    void _iterateMap(String key, WinLossCount value) {
+      str += "\n $key: ${value.winPercentange().toStringAsFixed(2)}";
+    }
+
+    current.forEach(_iterateMap);
+    str += "\n \n Previous:";
+    previous.forEach(_iterateMap);
+    return str;
   }
 }

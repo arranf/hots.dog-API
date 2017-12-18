@@ -6,13 +6,15 @@ class TalentWinRate {
 
   TalentWinRate(this.talent_level, this.talent_id, this.wins, this.losses);
 
-  factory TalentWinRate.fromJson(Object json, String talent_id, int level){
-    if (!json is Map){
+  factory TalentWinRate.fromJson(Object json, String talent_id, int level) {
+    if (!(json is Map)) {
       throw new Exception('JSON in unknown format');
     }
 
     Map map = json;
-    if (map.length != 2 || !map.containsKey('Wins') || !map.containsKey('Losses')){
+    if (map.length != 2 ||
+        !map.containsKey('Wins') ||
+        !map.containsKey('Losses')) {
       throw new Exception('JSON in unexpected format');
     }
 
@@ -20,7 +22,7 @@ class TalentWinRate {
   }
 
   @override
-  String toString(){
+  String toString() {
     return "$talent_id: wins $wins, losses $losses";
   }
 }

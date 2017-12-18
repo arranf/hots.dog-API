@@ -5,10 +5,10 @@ class BuildStatistics {
 
   BuildStatistics(this.total_games_played, this.win_rate, this.talents_names);
 
-  factory BuildStatistics.fromJson(Object json){
-    if (!json is Map){
+  factory BuildStatistics.fromJson(Object json) {
+    if (!(json is Map)) {
       throw new Exception('JSON in unexpected format.');
-    } 
+    }
     int total_games_played = json['Total'];
     num win_rate = json['Winrate'];
     List<String> talents = json['Build'];
