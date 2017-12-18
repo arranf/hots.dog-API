@@ -13,6 +13,8 @@ const String _winRateResource = '/api/get-winrates';
 const String _initResource = '/api/init';
 const String _buildWinRateResource = '/api/get-build-winrates';
 
+final Utf8Decoder _utf8Decoder = new Utf8Decoder();
+
 bool _isValidBuildNumber(String buildNumber) {
   RegExp regExp = new RegExp(r'\d+\.\d+\.\d+\.\d+');
   Match match = regExp.firstMatch(buildNumber);
@@ -28,13 +30,13 @@ Map<String, String> _getHeaders() {
 }
 
 Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
-  if (!_isValidBuildNumber(buildNumber)){
+  if (!_isValidBuildNumber(buildNumber)) {
     throw new Exception('Build number is not a valid build number');
   }
-  
+
   Map<String, String> query = {'build': buildNumber};
   if (mapName != '') {
-    query['map'] = mapName; 
+    query['map'] = mapName;
   }
 
   Uri uri = new Uri.https(_baseUrl, _winRateResource, query);
@@ -42,33 +44,38 @@ Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(response.body);
+
+  dynamic jsonData = JSON.decode(_getUtf8String(response));
   return new WinRates.fromJson(jsonData);
- }
+}
 
- Future<GameInfo> getGameInfo() async {
-   Uri uri = new Uri.https(_baseUrl, _initResource);
-   http.Response response = await http.get(uri, headers: _getHeaders());
-   if (response.statusCode != 200) {
-     return null;
-   }
-   dynamic jsonData = JSON.decode(response.body);
-   GameInfo gameInfo = new GameInfo.fromJson(jsonData);
-   return gameInfo;
- }
+Future<GameInfo> getGameInfo() async {
+  Uri uri = new Uri.https(_baseUrl, _initResource);
+  http.Response response = await http.get(uri, headers: _getHeaders());
+  if (response.statusCode != 200) {
+    return null;
+  }
+  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  GameInfo gameInfo = new GameInfo.fromJson(jsonData);
+  return gameInfo;
+}
 
- Future<BuildWinRates> getBuildWinRates(String buildNumber, String heroName) async {
-   if (!_isValidBuildNumber(buildNumber)){
+Future<BuildWinRates> getBuildWinRates(
+    String buildNumber, String heroName) async {
+  if (!_isValidBuildNumber(buildNumber)) {
     throw new Exception('Build number is not a valid build number');
   }
-  
+
   Map<String, String> query = {'build': buildNumber, 'hero': heroName};
   Uri uri = new Uri.https(_baseUrl, _buildWinRateResource, query);
   http.Response response = await http.get(uri, headers: _getHeaders());
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(response.body);
+  dynamic jsonData = JSON.decode(_getUtf8String(response));
   return new BuildWinRates.fromJson(jsonData);
- }
+}
 
+String _getUtf8String(http.Response response) {
+  return _utf8Decoder.convert(response.bodyBytes);
+}
