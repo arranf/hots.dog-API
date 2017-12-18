@@ -9,9 +9,10 @@ class BuildStatistics {
     if (!(json is Map)) {
       throw new Exception('JSON in unexpected format.');
     }
-    int total_games_played = json['Total'];
-    num win_rate = json['Winrate'];
-    List<String> talents = json['Build'];
+    Map map = json;
+    int total_games_played = map['Total'];
+    num win_rate = map['Winrate'];
+    List<String> talents = map['Build'];
     return new BuildStatistics(total_games_played, win_rate, talents);
   }
 }

@@ -15,8 +15,8 @@ class BuildInfo {
         json['Finish'] is String)) {
       throw new Exception('Unexpected JSON format.');
     }
-
-    return new BuildInfo(json['ID'], json['Start'], json['Finish']);
+    Map map = json;
+    return new BuildInfo(map['ID'], map['Start'], map['Finish']);
   }
 
   @override

@@ -14,22 +14,24 @@ class GameInfo {
       throw new Exception('Unexpected JSON. Expected JSON to be a Map.');
     }
 
-    if (!(json['Maps'] is List &&
-        json['Modes'] is Map &&
-        json['Builds'] is List &&
-        json['Heroes'] is List)) {
+    Map map = json;
+
+    if (!(map['Maps'] is List &&
+        map['Modes'] is Map &&
+        map['Builds'] is List &&
+        map['Heroes'] is List)) {
       throw new Exception('Unexpected JSON for inner property');
     }
 
     List<String> maps = [];
-    maps.addAll(json['Maps']);
+    maps.addAll(map['Maps']);
     List<String> modes = [];
-    json['Modes'].values.forEach((value) => modes.add(value));
+    map['Modes'].values.forEach((value) => modes.add(value));
     List<HeroInfo> heroes = [];
-    json['Heroes']
+    map['Heroes']
         .forEach((heroJson) => heroes.add(new HeroInfo.fromJson(heroJson)));
     List<BuildInfo> builds = [];
-    json['Builds']
+    map['Builds']
         .forEach((buildJson) => builds.add(new BuildInfo.fromJson(buildJson)));
     return new GameInfo(heroes, builds, modes, maps);
   }
