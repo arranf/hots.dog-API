@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 class BuildStatistics {
   final int total_games_played;
   final num win_rate;
@@ -29,10 +31,13 @@ class BuildStatistics {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
+  bool operator == (Object other) 
+  {
+      Function equals = const ListEquality().equals;
+      return identical(this, other) ||
       other is BuildStatistics &&
           this.total_games_played == other.total_games_played &&
-          this.talents_names == other.talents_names &&
+          equals(this.talents_names == other.talents_names) &&
           this.win_rate == other.win_rate;
+  }
 }

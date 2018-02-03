@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:hots_dog_api/src/model/build_statistics.dart';
 import 'talent.dart';
 import 'talent_win_rate.dart';
@@ -73,15 +74,21 @@ class BuildWinRates {
     return this.current.hashCode ^
       this.previous.hashCode ^
       this.popular_builds.hashCode ^
-      this.winning_builds.hashCode;
+      this.winning_builds.hashCode ^
+      this.talents.hashCode;
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
+  bool operator ==(Object other) {
+
+    Function equals = const ListEquality().equals;
+    return  identical(this, other) ||
       other is BuildWinRates &&
-          this.current == other.current &&
-          this.popular_builds == other.popular_builds &&
-          this.previous == other.previous &&
-          this.winning_builds == other.winning_builds;
+          equals(this.current, other.current) &&
+          equals(this.popular_builds, other.popular_builds) &&
+          equals(this.previous, other.previous) &&
+          equals(this.winning_builds, other.winning_builds) &&
+          equals(this.talents, other.talents);
+
+  }
 }
