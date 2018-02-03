@@ -25,4 +25,21 @@ class TalentWinRate {
   String toString() {
     return "$talent_id: wins $wins, losses $losses";
   }
+
+  @override
+  int get hashCode {
+    return this.losses.hashCode ^ 
+      this.wins.hashCode ^
+      this.talent_level.hashCode ^
+      this.talent_id.hashCode;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TalentWinRate &&
+          this.losses == other.losses &&
+          this.wins == other.wins &&
+          this.talent_level == other.talent_level &&
+          this.talent_id == other.talent_id;
 }

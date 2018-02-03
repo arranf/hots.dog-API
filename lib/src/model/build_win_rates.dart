@@ -65,6 +65,23 @@ class BuildWinRates {
 
   @override
   String toString() {
-    return "Current: $current, Previous: $previous, Talents: $talents, Winning Builds: $winning_builds";
+    return "Winning Builds: $winning_builds";
   }
+
+  @override
+  int get hashCode {
+    return this.current.hashCode ^
+      this.previous.hashCode ^
+      this.popular_builds.hashCode ^
+      this.winning_builds.hashCode;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BuildWinRates &&
+          this.current == other.current &&
+          this.popular_builds == other.popular_builds &&
+          this.previous == other.previous &&
+          this.winning_builds == other.winning_builds;
 }

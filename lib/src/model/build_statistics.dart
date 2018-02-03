@@ -15,4 +15,24 @@ class BuildStatistics {
     List<String> talents = map['Build'];
     return new BuildStatistics(total_games_played, win_rate, talents);
   }
+
+  @override
+  String toString() {
+    return "$total_games_played / ${win_rate*100}";
+  }
+
+  @override
+  int get hashCode {
+    return this.total_games_played.hashCode ^
+        this.talents_names.hashCode ^
+        this.win_rate.hashCode;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BuildStatistics &&
+          this.total_games_played == other.total_games_played &&
+          this.talents_names == other.talents_names &&
+          this.win_rate == other.win_rate;
 }
