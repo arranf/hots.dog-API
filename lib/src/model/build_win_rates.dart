@@ -71,11 +71,13 @@ class BuildWinRates {
 
   @override
   int get hashCode {
-    return this.current.hashCode ^
-      this.previous.hashCode ^
-      this.popular_builds.hashCode ^
-      this.winning_builds.hashCode ^
-      this.talents.hashCode;
+
+    Function hash = const ListEquality().hash;
+    return hash(this.current) ^
+      hash(this.previous) ^
+      hash(this.popular_builds) ^
+      hash(this.winning_builds) ^
+      hash(this.talents);
   }
 
   @override

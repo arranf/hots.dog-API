@@ -25,8 +25,9 @@ class BuildStatistics {
 
   @override
   int get hashCode {
+    Function hash = const ListEquality().hash;
     return this.total_games_played.hashCode ^
-        this.talents_names.hashCode ^
+        hash(talents_names) ^
         this.win_rate.hashCode;
   }
 
@@ -37,7 +38,7 @@ class BuildStatistics {
       return identical(this, other) ||
       other is BuildStatistics &&
           this.total_games_played == other.total_games_played &&
-          equals(this.talents_names == other.talents_names) &&
+          equals(this.talents_names, other.talents_names) &&
           this.win_rate == other.win_rate;
   }
 }
