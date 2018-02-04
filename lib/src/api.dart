@@ -29,6 +29,17 @@ Map<String, String> _getHeaders() {
   };
 }
 
+String _mapHeroName(String heroName) {
+  Map<String, String> heroNameMap = {
+    'Lucio': 'Lúcio'
+  };
+
+  if (heroNameMap.containsKey(heroName)){
+    return heroNameMap[heroName];
+  }
+  return heroName;
+}
+
 Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (!_isValidBuildNumber(buildNumber)) {
     throw new Exception('Build number is not a valid build number');
@@ -65,6 +76,8 @@ Future<BuildWinRates> getBuildWinRates(
   if (!_isValidBuildNumber(buildNumber)) {
     throw new Exception('Build number is not a valid build number');
   }
+
+  heroName = _mapHeroName(heroName);
 
   Map<String, String> query = {'build': buildNumber, 'hero': heroName};
   Uri uri = new Uri.https(_baseUrl, _buildWinRateResource, query);
