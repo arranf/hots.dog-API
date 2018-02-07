@@ -1,5 +1,5 @@
+import 'package:hots_dog_api/src/utils.dart';
 import 'win_loss_count.dart';
-import 'dart:convert';
 
 class WinRates {
   final Map<String, WinLossCount> current;
@@ -12,16 +12,19 @@ class WinRates {
       var current = new Map<String, WinLossCount>();
       var previous = new Map<String, WinLossCount>();
       if (json['Current'] is Map && json['Previous'] is Map) {
-        for (String key in json['Current'].keys) {
-          var heroWinMap = json['Current'][key];
+        for (String heroName in json['Current'].keys) {
+          var heroWinMap = json['Current'][heroName];
           if (heroWinMap is Map) {
-            current[key] = new WinLossCount.fromJson(heroWinMap);
+            String newName = mapHeroName(heroName);
+            current[newName] = new WinLossCount.fromJson(heroWinMap);
           }
         }
-        for (var key in json['Previous'].keys) {
-          var heroWinMap = json['Previous'][key];
+        for (var heroName in json['Previous'].keys) {
+          var heroWinMap = json['Previous'][heroName];
           if (heroWinMap is Map) {
-            previous[key] = new WinLossCount.fromJson(heroWinMap);
+
+            String newName = mapHeroName(heroName);
+            previous[newName] = new WinLossCount.fromJson(heroWinMap);
           }
         }
       } else {

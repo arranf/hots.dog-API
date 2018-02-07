@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hots_dog_api/src/model/build_win_rates.dart';
+import 'package:hots_dog_api/src/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:hots_dog_api/src/model/win_rates.dart';
 import 'package:hots_dog_api/src/model/game_info.dart';
@@ -29,16 +30,7 @@ Map<String, String> _getHeaders() {
   };
 }
 
-String _mapHeroName(String heroName) {
-  Map<String, String> heroNameMap = {
-    'Lucio': 'Lúcio'
-  };
 
-  if (heroNameMap.containsKey(heroName)){
-    return heroNameMap[heroName];
-  }
-  return heroName;
-}
 
 Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (!_isValidBuildNumber(buildNumber)) {
@@ -77,7 +69,7 @@ Future<BuildWinRates> getBuildWinRates(
     throw new Exception('Build number is not a valid build number');
   }
 
-  heroName = _mapHeroName(heroName);
+  heroName = mapHeroName(heroName);
 
   Map<String, String> query = {'build': buildNumber, 'hero': heroName};
   Uri uri = new Uri.https(_baseUrl, _buildWinRateResource, query);
