@@ -17,7 +17,7 @@ const String _buildWinRateResource = '/api/get-build-winrates';
 final Utf8Decoder _utf8Decoder = new Utf8Decoder();
 
 bool _isValidBuildNumber(String buildNumber) {
-  RegExp regExp = new RegExp(r'\d+\.\d+\.\d+\.\d+');
+  RegExp regExp = new RegExp(r'\d+\.\d+\.\d+');
   Match match = regExp.firstMatch(buildNumber);
   return (match != null && match.group(0) == buildNumber);
 }
