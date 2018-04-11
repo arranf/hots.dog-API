@@ -9,7 +9,7 @@ class GameInfo {
 
   GameInfo(this.heroInfo, this.buildInfo, this.modes, this.maps);
 
-  factory GameInfo.fromJson(Object json) {
+  factory GameInfo.fromJson(Map<dynamic, dynamic> json) {
     if (!(json is Map)) {
       throw new Exception('Unexpected JSON. Expected JSON to be a Map.');
     }
@@ -24,15 +24,15 @@ class GameInfo {
     }
 
     List<String> maps = [];
-    maps.addAll(map['Maps']);
+    maps.addAll(map['Maps'] as List<String>);
     List<String> modes = [];
-    map['Modes'].values.forEach((value) => modes.add(value));
+    map['Modes'].values.forEach((String value) => modes.add(value));
     List<HeroInfo> heroes = [];
     map['Heroes']
-        .forEach((heroJson) => heroes.add(new HeroInfo.fromJson(heroJson)));
+        .forEach((Map<dynamic, dynamic> heroJson) => heroes.add(new HeroInfo.fromJson(heroJson)));
     List<BuildInfo> builds = [];
     map['Builds']
-        .forEach((buildJson) => builds.add(new BuildInfo.fromJson(buildJson)));
+        .forEach((Map<dynamic, dynamic> buildJson) => builds.add(new BuildInfo.fromJson(buildJson)));
     return new GameInfo(heroes, builds, modes, maps);
   }
 

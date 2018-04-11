@@ -48,7 +48,7 @@ Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
     return null;
   }
 
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  dynamic jsonData = json.decode(_getUtf8String(response));
   return new WinRates.fromJson(jsonData);
 }
 
@@ -58,7 +58,7 @@ Future<GameInfo> getGameInfo() async {
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  Map<dynamic, dynamic> jsonData = json.decode(_getUtf8String(response)) as Map<dynamic, dynamic>;
   GameInfo gameInfo = new GameInfo.fromJson(jsonData);
   return gameInfo;
 }
@@ -77,7 +77,7 @@ Future<BuildWinRates> getBuildWinRates(
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  Map<dynamic, dynamic> jsonData = json.decode(_getUtf8String(response)) as Map<dynamic, dynamic>;
   return new BuildWinRates.fromJson(jsonData);
 }
 

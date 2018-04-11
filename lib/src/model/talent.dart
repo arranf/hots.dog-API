@@ -5,7 +5,7 @@ class Talent {
 
   Talent(this.name, this.text, this.id);
 
-  factory Talent.fromJson(Object json, String talent_id) {
+  factory Talent.fromJson(Map<dynamic, dynamic> json, String talent_id) {
     if (!(json is Map)) {
       throw new Exception('JSON in unexpected format');
     }
@@ -15,7 +15,7 @@ class Talent {
         !talent_info.containsKey('Text')) {
       throw new Exception('JSON in unexpected format');
     }
-    return new Talent(talent_info['Name'], talent_info['Text'], talent_id);
+    return new Talent(talent_info['Name'] as String, talent_info['Text'] as String, talent_id);
   }
 
   @override

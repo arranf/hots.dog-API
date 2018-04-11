@@ -10,7 +10,7 @@ class WinLossCount {
 
   factory WinLossCount.fromJson(Object json) {
     if (json is Map) {
-      return new WinLossCount(json['Wins'], json['Losses']);
+      return new WinLossCount(json['Wins'] as num, json['Losses'] as num);
     } else {
       throw new Exception('The provided JSON must be a Map.');
     }

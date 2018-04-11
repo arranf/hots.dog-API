@@ -6,7 +6,7 @@ class TalentWinRate {
 
   TalentWinRate(this.talent_level, this.talent_id, this.wins, this.losses);
 
-  factory TalentWinRate.fromJson(Object json, String talent_id, int level) {
+  factory TalentWinRate.fromJson(Map<dynamic, dynamic> json, String talent_id, int level) {
     if (!(json is Map)) {
       throw new Exception('JSON in unknown format');
     }
@@ -18,7 +18,7 @@ class TalentWinRate {
       throw new Exception('JSON in unexpected format');
     }
 
-    return new TalentWinRate(level, talent_id, map['Wins'], map['Losses']);
+    return new TalentWinRate(level, talent_id, map['Wins'] as int, map['Losses'] as int);
   }
 
   @override

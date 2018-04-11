@@ -13,7 +13,7 @@ class BuildWinRates {
   BuildWinRates(this.current, this.previous, this.talents, this.popular_builds,
       this.winning_builds);
 
-  factory BuildWinRates.fromJson(Object json) {
+  factory BuildWinRates.fromJson(Map<dynamic, dynamic> json) {
     if (!(json is Map)) {
       throw new Exception('Unexpected JSON format.');
     }
@@ -22,21 +22,21 @@ class BuildWinRates {
     List<TalentWinRate> current = new List<TalentWinRate>();
     List<TalentWinRate> previous = new List<TalentWinRate>();
     if (map['Current'] is Map && map['Previous'] is Map) {
-      Map currentMap = map['Current'];
+      Map currentMap = map['Current'] as Map<dynamic, dynamic>;
       for (var level in currentMap.keys) {
         var levelWinRates = currentMap[level];
         for (var talent_id in levelWinRates.keys) {
           current.add(new TalentWinRate.fromJson(
-              levelWinRates[talent_id], talent_id, int.parse(level)));
+              levelWinRates[talent_id] as Map<dynamic, dynamic>, talent_id as String, int.parse(level as String)));
         }
       }
 
-      Map previousMap = map['Previous'];
+      Map previousMap = map['Previous'] as Map<dynamic, dynamic>;
       for (var level in previousMap.keys) {
         var levelWinRates = previousMap[level];
         for (var talent_id in levelWinRates.keys) {
           previous.add(new TalentWinRate.fromJson(
-              levelWinRates[talent_id], talent_id, int.parse(level)));
+              levelWinRates[talent_id] as Map<dynamic, dynamic>, talent_id as String, int.parse(level as String)));
         }
       }
     }
@@ -45,7 +45,7 @@ class BuildWinRates {
 
     if (map['Talents'] is Map) {
       for (String key in map['Talents'].keys) {
-        talents.add(new Talent.fromJson(map['Talents'][key], key));
+        talents.add(new Talent.fromJson(map['Talents'][key] as Map<dynamic, dynamic>, key));
       }
     }
 
@@ -71,8 +71,7 @@ class BuildWinRates {
 
   @override
   int get hashCode {
-
-    Function hash = const ListEquality().hash;
+    var hash = const ListEquality().hash;
     return hash(this.current) ^
       hash(this.previous) ^
       hash(this.popular_builds) ^
@@ -83,8 +82,8 @@ class BuildWinRates {
   @override
   bool operator ==(Object other) {
 
-    Function equals = const ListEquality().equals;
-    return  identical(this, other) ||
+    var equals = const ListEquality().equals;
+    return identical(this, other) ||
       other is BuildWinRates &&
           equals(this.current, other.current) &&
           equals(this.popular_builds, other.popular_builds) &&
