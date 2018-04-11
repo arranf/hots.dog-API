@@ -14,7 +14,7 @@ class BuildStatistics {
     Map<dynamic, dynamic> map = json;
     int total_games_played = map['Total'] as int;
     num win_rate = map['Winrate'] as num;
-    List<String> talents = map['Build'] as List<String>;
+    List<String> talents = (map['Build'] as List<dynamic>).cast<String>();
     return new BuildStatistics(total_games_played, win_rate, talents);
   }
 
