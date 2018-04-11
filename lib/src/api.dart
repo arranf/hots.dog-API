@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:hots_dog_api/src/model/win_rates.dart';
 import 'package:hots_dog_api/src/model/game_info.dart';
 
+// TODO DEPENDENCY INJECT HTTP https://stackoverflow.com/questions/37485861/testing-a-dart-api-wrapper
+
 const String _baseUrl = 'hots.dog';
 const String _winRateResource = '/api/get-winrates';
 const String _initResource = '/api/init';
@@ -29,8 +31,6 @@ Map<String, String> _getHeaders() {
     "User-Agent": "arranf (https://github.com/arranf/hots.dog-API)"
   };
 }
-
-
 
 Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (!_isValidBuildNumber(buildNumber)) {
