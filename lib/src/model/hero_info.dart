@@ -6,7 +6,7 @@ class HeroInfo {
 
   HeroInfo(this.name, this.slug, this.role, this.multiRole);
 
-  factory HeroInfo.fromJson(Object json) {
+  factory HeroInfo.fromJson(Map<dynamic, dynamic> json) {
     if (!(json is Map)) {
       throw new Exception(
           'JSON is in an unexpected format. Expected a JSON object.');
@@ -23,6 +23,6 @@ class HeroInfo {
     }
 
     return new HeroInfo(
-        map['Name'], map['Slug'], map['Role'], map['MultiRole']);
+        map['Name'] as String, map['Slug'] as String, map['Role'] as String, map['MultiRole'] as List<String>);
   }
 }

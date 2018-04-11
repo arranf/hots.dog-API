@@ -19,7 +19,7 @@ class WinRates {
             current[newName] = new WinLossCount.fromJson(heroWinMap);
           }
         }
-        for (var heroName in json['Previous'].keys) {
+        for (String heroName in json['Previous'].keys) {
           var heroWinMap = json['Previous'][heroName];
           if (heroWinMap is Map) {
 

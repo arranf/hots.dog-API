@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:hots_dog_api/src/model/win_rates.dart';
 import 'package:hots_dog_api/src/model/game_info.dart';
 
+// TODO DEPENDENCY INJECT HTTP https://stackoverflow.com/questions/37485861/testing-a-dart-api-wrapper
+
 const String _baseUrl = 'hots.dog';
 const String _winRateResource = '/api/get-winrates';
 const String _initResource = '/api/init';
@@ -30,8 +32,6 @@ Map<String, String> _getHeaders() {
   };
 }
 
-
-
 Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
   if (!_isValidBuildNumber(buildNumber)) {
     throw new Exception('Build number is not a valid build number');
@@ -48,7 +48,7 @@ Future<WinRates> getWinRates(String buildNumber, {String mapName = ''}) async {
     return null;
   }
 
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  dynamic jsonData = json.decode(_getUtf8String(response));
   return new WinRates.fromJson(jsonData);
 }
 
@@ -58,7 +58,7 @@ Future<GameInfo> getGameInfo() async {
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  Map<dynamic, dynamic> jsonData = json.decode(_getUtf8String(response)) as Map<dynamic, dynamic>;
   GameInfo gameInfo = new GameInfo.fromJson(jsonData);
   return gameInfo;
 }
@@ -77,7 +77,7 @@ Future<BuildWinRates> getBuildWinRates(
   if (response.statusCode != 200) {
     return null;
   }
-  dynamic jsonData = JSON.decode(_getUtf8String(response));
+  Map<dynamic, dynamic> jsonData = json.decode(_getUtf8String(response)) as Map<dynamic, dynamic>;
   return new BuildWinRates.fromJson(jsonData);
 }
 

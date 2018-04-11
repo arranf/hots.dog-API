@@ -18,4 +18,11 @@ main() async {
   } catch (e) {
     print(e);
   }
+
+  try {
+    GameInfo gameInfo = await getGameInfo();
+    print(gameInfo);
+  } catch (e) {
+    print(e);
+  }
 }

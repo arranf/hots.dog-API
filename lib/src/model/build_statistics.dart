@@ -7,14 +7,14 @@ class BuildStatistics {
 
   BuildStatistics(this.total_games_played, this.win_rate, this.talents_names);
 
-  factory BuildStatistics.fromJson(Object json) {
+  factory BuildStatistics.fromJson(Map<dynamic, dynamic> json) {
     if (!(json is Map)) {
       throw new Exception('JSON in unexpected format.');
     }
-    Map map = json;
-    int total_games_played = map['Total'];
-    num win_rate = map['Winrate'];
-    List<String> talents = map['Build'];
+    Map<dynamic, dynamic> map = json;
+    int total_games_played = map['Total'] as int;
+    num win_rate = map['Winrate'] as num;
+    List<String> talents = map['Build'] as List<String>;
     return new BuildStatistics(total_games_played, win_rate, talents);
   }
 
@@ -25,7 +25,7 @@ class BuildStatistics {
 
   @override
   int get hashCode {
-    Function hash = const ListEquality().hash;
+    var hash = const ListEquality().hash;
     return this.total_games_played.hashCode ^
         hash(talents_names) ^
         this.win_rate.hashCode;
@@ -34,7 +34,7 @@ class BuildStatistics {
   @override
   bool operator == (Object other) 
   {
-      Function equals = const ListEquality().equals;
+      var equals = const ListEquality().equals;
       return identical(this, other) ||
       other is BuildStatistics &&
           this.total_games_played == other.total_games_played &&
