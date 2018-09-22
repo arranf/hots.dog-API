@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:hots_dog_api/hots_dog_api.dart';
 
 main() async {
