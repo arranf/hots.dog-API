@@ -1,5 +1,6 @@
 import 'hero_info.dart';
 import 'build_info.dart';
+import '../utils.dart';
 
 class GameInfo {
   final List<HeroInfo> heroInfo;
@@ -22,22 +23,28 @@ class GameInfo {
         map['Heroes'] is List)) {
       throw new Exception('Unexpected JSON for inner property');
     }
-
+    
     List<String> maps = [];
-    maps.addAll(map['Maps'] as List<String>);
+    map['Maps'].forEach((dynamic value) {
+      if(value != null && !isBlank(value as String)) {maps.add(((value as String)));}
+    });
+
     List<String> modes = [];
-    map['Modes'].values.forEach((String value) => modes.add(value));
+    map['Modes'].values.forEach((dynamic value) {
+      if(value != null && !isBlank(value as String)) {modes.add(((value as String)));}
+    });
+
     List<HeroInfo> heroes = [];
     map['Heroes']
-        .forEach((Map<dynamic, dynamic> heroJson) => heroes.add(new HeroInfo.fromJson(heroJson)));
+        .forEach((dynamic heroJson) => heroes.add(new HeroInfo.fromJson(heroJson as Map<dynamic, dynamic>)));
     List<BuildInfo> builds = [];
     map['Builds']
-        .forEach((Map<dynamic, dynamic> buildJson) => builds.add(new BuildInfo.fromJson(buildJson)));
+        .forEach((dynamic buildJson) => builds.add(new BuildInfo.fromJson(buildJson as Map<dynamic, dynamic>)));
     return new GameInfo(heroes, builds, modes, maps);
   }
 
   @override
   String toString() {
-    return 'GameInfo{heroInfo: $heroInfo, maps: $maps, modes: $modes, buildINfo: $buildInfo}';
+    return 'GameInfo{heroInfo: $heroInfo, maps: $maps, modes: $modes, buildInfo: $buildInfo}';
   }
 }

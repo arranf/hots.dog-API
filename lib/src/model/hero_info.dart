@@ -23,6 +23,8 @@ class HeroInfo {
     }
 
     return new HeroInfo(
-        map['Name'] as String, map['Slug'] as String, map['Role'] as String, map['MultiRole'] as List<String>);
+        map['Name'] as String, map['Slug'] as String, map['Role'] as String, (map['MultiRole'] as List).cast<String>());
   }
+
+  String toString() => this.name;
 }

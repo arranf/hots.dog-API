@@ -9,3 +9,5 @@ String mapHeroName(String heroName) {
   }
   return heroName;
 }
+
+bool isBlank(String s) => s == null || s.trim().isEmpty;
