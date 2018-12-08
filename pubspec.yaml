@@ -1,12 +1,12 @@
 name: hots_dog_api
 description: API calls for the hots.dog Heres of Storm API
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/arranf/hots.dog-API
 authors:
   - Arran France <arranf@gmail.com>
 
 environment:
-  sdk: '>= 2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
   http: ^0.12.0
